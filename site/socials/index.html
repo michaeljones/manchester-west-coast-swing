@@ -152,7 +152,7 @@
 
     <div class="section">
       <h2>WhatsApp</h2>
-      <p>This <b id="date-whatsapp">- placeholder -</b>, we are at our regular venue Tib St Studio - 72 Tib Street, in the Northern Quarter - https://maps.app.goo.gl/LHkv5cFfCw9UjJWQ7 - use the buzzer labelled 'Tib St Studio' on the left hand side of the door and come up to the first floor!</p>
+      <p>This <span id="date-whatsapp">- placeholder -</span>, we are at our regular venue Tib St Studio - 72 Tib Street, in the Northern Quarter - https://maps.app.goo.gl/LHkv5cFfCw9UjJWQ7 - use the buzzer labelled 'Tib St Studio' on the left hand side of the door and come up to the first floor!</p>
 
       <p>Here’s what the evening will look like:</p>
 
@@ -175,13 +175,13 @@
     if (dateFns.isFriday(now)) {
       document.getElementById('date-insta').textContent = dateFns.format(now, "iiii do MMMM");
       document.getElementById('date-fb').textContent = dateFns.format(now, "iiii, do MMMM");
-      document.getElementById('date-whatsapp').textContent = dateFns.format(now, "iiii, do MMMM");
+      document.getElementById('date-whatsapp').textContent = dateFns.format(now, "*iiii*, *do MMMM*");
     } else {
       const nextFriday = dateFns.nextFriday(now);
 
       document.getElementById('date-insta').textContent = dateFns.format(nextFriday, "iiii do MMMM");
       document.getElementById('date-fb').textContent = dateFns.format(nextFriday, "iiii, do MMMM");
-      document.getElementById('date-whatsapp').textContent = dateFns.format(nextFriday, "iiii, do MMMM");
+      document.getElementById('date-whatsapp').textContent = dateFns.format(nextFriday, "*iiii*, *do MMMM*");
     }
 
     let untilNodes = document.querySelectorAll("[data-until]");
