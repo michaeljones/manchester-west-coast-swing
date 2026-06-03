@@ -29,14 +29,7 @@
     }
 
     main {
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-
-      & > div {
-        width: 800px;
-      }
+      font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     }
 
     .my-1 {
@@ -72,12 +65,65 @@
     }
 
     .section {
-      border: 1px solid black;
-      padding: 38px;
+      display: flex;
+
+      gap: 20px;
     }
 
     .section + .section {
       margin-top: 40px;
+    }
+
+    .prices {
+      display: flex;
+      height: 100%;
+
+      justify-content: center;
+      align-items: center;
+
+      font-size: 100px;
+    }
+
+    .offer {
+      display: flex;
+      height: 100%;
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 50px;
+
+      & p {
+        padding: 20px 20px;
+
+      }
+      & .cost {
+        padding-top: 80px;
+      }
+    }
+
+    .regular {
+      display: flex;
+      height: 100%;
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 50px;
+
+      & p {
+        padding: 20px 20px;
+      }
+
+      & .cost {
+        padding-top: 80px;
+      }
+    }
+
+    .cost {
+      font-size: 100px;
     }
   </style>
 </head>
@@ -86,12 +132,11 @@
 
   <main>
     <div class="section">
-      <h2>Instagram</h2>
       <div class="instagram-border">
         <div class="instagram">
-          <div class="block">
+          <div class="prices">
             <p>
-            Prices
+              Prices
             </p>
           </div>
         </div>
@@ -99,31 +144,15 @@
 
       <div class="instagram-border">
         <div class="instagram">
-          <div class="block">
+          <div class="regular">
             <p>
-              Starter offer!
+              Friday night
+            </p>
+            <p class="cost">
+              £10
             </p>
             <p>
-              £20 for your first 4 Fridays - classes & socials
-            </p>
-            <p>
-              Take them at your leisure - no requirement to attend on consecutive Fridays
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="instagram-border">
-        <div class="instagram">
-          <div class="block">
-            <p>
-              Regular attendee offer!
-            </p>
-            <p>
-              £35 for 4 Fridays - classes & socials
-            </p>
-            <p>
-              Take them at your leisure - no requirement to attend on consecutive Fridays
+              for classes & the social
             </p>
           </div>
         </div>
@@ -131,19 +160,36 @@
 
       <div class="instagram-border">
         <div class="instagram">
-          <div class="block">
+          <div class="offer">
             <p>
-              One off attendance
+              New beginners' offer!
+            </p>
+            <p class="cost">
+              £20
             </p>
             <p>
-              £10 for classes & the social
-            </p>
-            <p>
-              £5 just the social
+              for your first <b>4</b> nights
             </p>
           </div>
         </div>
       </div>
+
+      <div class="instagram-border">
+        <div class="instagram">
+          <div class="offer">
+            <p>
+              Regular dancer offer!
+            </p>
+            <p class="cost">
+              £35
+            </p>
+            <p>
+              for any <b>4</b> Fridays
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 </body>
