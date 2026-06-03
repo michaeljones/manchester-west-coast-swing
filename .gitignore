@@ -1,2 +1,4 @@
 # Ignore generated index file
 /index.html
+
+/node_modules
