@@ -45,6 +45,30 @@
       margin: 10px 0;
     }
 
+    .my-2 {
+      margin: 20px 0;
+    }
+
+    .my-4 {
+      margin: 40px 0;
+    }
+
+    .my-8 {
+      margin: 80px 0;
+    }
+
+    .mt-8 {
+      margin-top: 80px;
+    }
+
+    .mb-8 {
+      margin-bottom: 80px;
+    }
+
+    .mt-12 {
+      margin-top: 120px;
+    }
+
     .block {
       margin: 25px 0;
       text-align: center;
@@ -80,6 +104,13 @@
 
     .section + .section {
       margin-top: 40px;
+    }
+
+    .flex-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -129,6 +160,25 @@
     </div>
 
     <div class="section">
+      <h2>Our Instagram Cancelled</h2>
+      <div id="instagram-border">
+        <div id="instagram" class="flex-center">
+          <div class="block">
+            <p class="my-1">
+              No classes or social on
+            </p>
+            <p class="my-1">
+              <b class="date-insta">- placeholder -</b>
+            </p>
+            <p class="mt-12"> We'll be back on  </p>
+            <p class="date-insta-next">- placeholder -</p>
+            <p class="mb-8"> with our regular evening </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
       <h2>Our WhatsApp</h2>
       <p>This <span id="date-whatsapp">- placeholder -</span>, we are at our regular venue Tib St Studio - 72 Tib Street, in the Northern Quarter - https://maps.app.goo.gl/LHkv5cFfCw9UjJWQ7 - use the buzzer labelled 'Tib St Studio' on the left hand side of the door and come up to the first floor!</p>
 
@@ -165,7 +215,9 @@
 
       <p>If you're already dancing at a more experienced level and aren't quite sure which class would suit you best, feel free to send us a message so we can tell you more.</p>
 
-      <p data-until="2026-04-24"><strong>Reminder:</strong> Due to the Manchester Detonation Dance event, we will not be running our regular Friday evening on Friday 24th April.</p>
+      <p>It is £10 for the evening and there is an introductory offer of £20 for four evenings. The evenings do not need to be consecutive.  Beyond the starter offer you can pay £35 for four evenings.</p> 
+
+      <p data-run-up-until="2027-04-23"><strong>Reminder:</strong> Due to the Manchester Detonation Dance event, we will not be running our regular Friday evening on Friday 23rd April.</p>
 
       <p>And finally, this week’s video is</p>
     </div>
@@ -207,23 +259,39 @@ Instagram: https://www.instagram.com/manchesterwestcoastswing
   </main>
 
   <script>
-    const now = new Date();
-    if (dateFns.isFriday(now)) {
-      document.getElementById('date-insta').textContent = dateFns.format(now, "iiii do MMMM");
-      document.getElementById('date-fb').textContent = dateFns.format(now, "iiii, do MMMM");
-      document.getElementById('date-whatsapp').textContent = dateFns.format(now, "*iiii*, *do MMMM*");
-    } else {
-      const nextFriday = dateFns.nextFriday(now);
-
-      document.getElementById('date-insta').textContent = dateFns.format(nextFriday, "iiii do MMMM");
-      document.getElementById('date-fb').textContent = dateFns.format(nextFriday, "iiii, do MMMM");
-      document.getElementById('date-whatsapp').textContent = dateFns.format(nextFriday, "*iiii*, *do MMMM*");
+    function replace(className, date, format) {
+      let elements = document.getElementsByClassName(className);
+      for (let element of elements) {
+        element.textContent = dateFns.format(date, format);
+      }
     }
+
+    const now = new Date();
+    let thisFriday = dateFns.isFriday(now) ? now : dateFns.nextFriday(now);
+    let followingFriday = dateFns.addWeeks(thisFriday, 1);
+
+    document.getElementById('date-insta').textContent = dateFns.format(thisFriday, "iiii do MMMM");
+
+    replace('date-insta', thisFriday, "iiii do MMMM");
+    replace('date-insta-next', followingFriday, "iiii do MMMM");
+
+    document.getElementById('date-fb').textContent = dateFns.format(thisFriday, "iiii, do MMMM");
+    document.getElementById('date-whatsapp').textContent = dateFns.format(thisFriday, "*iiii*, *do MMMM*");
 
     let untilNodes = document.querySelectorAll("[data-until]");
     for (let node of untilNodes) {
       let until = dateFns.parseISO(node.dataset.until);
       if (now > until) {
+        node.style.display = "none";
+      }
+    }
+
+    // Show nodes with a 'run up until' date, for 4 weeks up to that date but hide them before and after that window
+    let fourWeeksFromNow = dateFns.addWeeks(now, 4);
+    let runUpNodes = document.querySelectorAll("[data-run-up-until]");
+    for (let node of runUpNodes) {
+      let until = dateFns.parseISO(node.dataset.runUpUntil);
+      if (fourWeeksFromNow < until || now > util) {
         node.style.display = "none";
       }
     }
