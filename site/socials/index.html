@@ -204,6 +204,9 @@
       <p>If you're already dancing at a more experienced level and aren't quite sure which class would suit you best, feel free to send us a message so we can tell you more.</p>
 
       <p>It is £10 for the evening and there is an introductory offer of £20 for four evenings. The evenings do not need to be consecutive.  Beyond the starter offer you can pay £35 for four evenings.</p> 
+
+      <p data-run-up-until="2027-04-23"><strong>Reminder:</strong> Due to the Manchester Detonation Dance event, we will not be running our regular Friday evening on Friday 23rd April.</p>
+
       <p>And finally, this week’s video is</p>
     </div>
 
@@ -261,6 +264,16 @@ Instagram: https://www.instagram.com/manchesterwestcoastswing
     for (let node of untilNodes) {
       let until = dateFns.parseISO(node.dataset.until);
       if (now > until) {
+        node.style.display = "none";
+      }
+    }
+
+    // Show nodes with a 'run up until' date, for 4 weeks up to that date but hide them before and after that window
+    let fourWeeksFromNow = dateFns.addWeeks(now, 4);
+    let runUpNodes = document.querySelectorAll("[data-run-up-until]");
+    for (let node of runUpNodes) {
+      let until = dateFns.parseISO(node.dataset.runUpUntil);
+      if (fourWeeksFromNow < until || now > util) {
         node.style.display = "none";
       }
     }
