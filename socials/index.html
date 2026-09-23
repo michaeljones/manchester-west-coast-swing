@@ -295,7 +295,7 @@ Instagram: https://www.instagram.com/manchesterwestcoastswing
     let runUpNodes = document.querySelectorAll("[data-run-up-until]");
     for (let node of runUpNodes) {
       let until = dateFns.parseISO(node.dataset.runUpUntil);
-      if (fourWeeksFromNow < until || now > util) {
+      if (fourWeeksFromNow < until || now > until) {
         node.style.display = "none";
       }
     }
